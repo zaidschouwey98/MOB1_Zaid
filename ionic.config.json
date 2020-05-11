@@ -1,0 +1,7 @@
+{
+  "name": "MOB1_Zaid",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
