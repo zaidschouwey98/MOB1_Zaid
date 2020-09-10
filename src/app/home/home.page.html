@@ -1,10 +1,14 @@
-<ion-content class="ion-padding" >
-  <ion-grid style="margin-top: 60px;">
-
-    grg
-
-      
-
-  </ion-grid>
-</ion-content>
+  <ion-content class="ion-padding" >
+    <ion-grid style="margin-top: 60px;">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Token</ion-label>
+            <ion-input type="text" [(ngModel)]="token"></ion-input>
+          </ion-item>
+          <ion-button (click)="addToken()" size="small">Appliquer le token</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
 

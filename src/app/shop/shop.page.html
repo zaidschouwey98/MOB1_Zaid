@@ -1,9 +1,18 @@
 <ion-content class="ion-padding" >
   <ion-grid style="margin-top: 60px;">
 
-   jjjkjn
-      
+    <ion-item>
+      <ion-label>All</ion-label>
+      <ion-radio value="0" (ionFocus)="all()"></ion-radio>
+    </ion-item>
 
+    <ion-radio-group>    
+      <ion-item>
+        <ion-card *ngFor="let data of Alldatas" >
+         <p> asdf {{ data.id }}
+        </ion-card>
+      </ion-item>
+    </ion-radio-group>
   </ion-grid>
 </ion-content>
 

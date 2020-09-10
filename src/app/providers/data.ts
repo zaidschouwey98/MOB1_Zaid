@@ -26,25 +26,4 @@ export class DataProvider {
       )
     })
   }
-
-  public loadUserFromAPI(): Promise<any>{
-    return new Promise<any> ( (resolve, reject) => {
-      this.http.get(this.apiurl+'/me').subscribe(
-        response => {
-          this.user = response['data'];
-          
-          this.storage.set('firstname', this.user['firstname']);
-          this.storage.set('lastname', this.user['lastname']);
-          this.storage.set('phone', null);
-          console.log(this.user['firstname']);
-        },
-        err => {
-          this.storage.set('firstname', null);
-          this.storage.set('lastname', null);
-          this.storage.set('phone', null);
-          console.log('API failed with code '+err.status)
-        }
-      )
-    })
-  }
 }

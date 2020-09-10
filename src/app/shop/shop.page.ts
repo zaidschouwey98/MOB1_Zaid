@@ -8,15 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./shop.page.scss'],
 })
 export class ShopPage implements OnInit {
- 
-
-  constructor() {
-   
-   }
+  Alldatas: any;
+  private Datas: DataProvider;
+  constructor(data:DataProvider) {
+    this.Datas = data;
+    this.Alldatas = this.Datas.stock;
+  }
 
   ngOnInit() {
-    
+    this.Alldatas = this.Datas.loadFromAPI();
+    this.Alldatas = this.Datas.stock;
   }
+
+  all(){
+    this.Alldatas = this.Datas.stock;
+  }
+  
 
 }
 
