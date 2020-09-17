@@ -1,18 +1,13 @@
 <ion-content class="ion-padding" >
   <ion-grid style="margin-top: 60px;">
-
-    <ion-item>
-      <ion-label>All</ion-label>
-      <ion-radio value="0" (ionFocus)="all()"></ion-radio>
-    </ion-item>
-
-    <ion-radio-group>    
-      <ion-item>
-        <ion-card *ngFor="let data of Alldatas" >
-         <p> asdf {{ data.id }}
-        </ion-card>
+   
+      <ion-item *ngFor="let data of Datas.stock" button (click)="details(data)">
+        <ion-label>
+          {{data.name}}
+        </ion-label>
+        <ion-note slot="end" color="primary">{{data.stock}} Pièces {{ data.price }} CHF</ion-note>
       </ion-item>
-    </ion-radio-group>
+  
   </ion-grid>
 </ion-content>
 

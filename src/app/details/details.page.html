@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img src="http://127.0.0.1:8000/storage/pictures/{{ value.picture }}">
+    <ion-card-header>
+      <ion-card-subtitle>{{value.stock}} Pièces</ion-card-subtitle>
+      <ion-card-title>{{value.name}} | {{value.price}} CHF</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{value.details}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

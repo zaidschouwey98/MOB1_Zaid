@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProvider } from '../providers/data';
 import { Router } from '@angular/router';
+import { debug } from 'console';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-shop',
@@ -10,20 +12,18 @@ import { Router } from '@angular/router';
 export class ShopPage implements OnInit {
   Alldatas: any;
   private Datas: DataProvider;
-  constructor(data:DataProvider) {
+  constructor(data:DataProvider, private router : Router) {
     this.Datas = data;
     this.Alldatas = this.Datas.stock;
   }
 
   ngOnInit() {
-    this.Alldatas = this.Datas.loadFromAPI();
-    this.Alldatas = this.Datas.stock;
+    this.Datas.loadFromAPI();
+   
   }
-
-  all(){
-    this.Alldatas = this.Datas.stock;
+  details(product){
+    this.router.navigateByUrl("details/",product)
   }
-  
 
 }
 

@@ -46,7 +46,6 @@ export class HomePage implements OnInit {
 
   addToken(){
     this.storage.set('token', this.token);
-    console.log('tokenok');
   }
 
 }
