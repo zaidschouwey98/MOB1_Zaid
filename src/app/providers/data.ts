@@ -26,4 +26,16 @@ export class DataProvider {
       )
     })
   }
+  public registerToAPI(firstname,lastname,phonenumber){
+    
+    this.http.post(this.apiurl+"/user/apply", {
+      firstname,
+      lastname,
+      phonenumber
+    }).subscribe(
+      res => console.log("success"),
+      err => {
+      console.log('API failed with code '+err)
+    })
+  }
 }

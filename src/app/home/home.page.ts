@@ -41,11 +41,14 @@ export class HomePage implements OnInit {
       }).then(toast => {
         toast.present();
       });
+      this.Datas.registerToAPI(this.firstname,this.lastname,this.phone);
+     
     }
   }
 
   addToken(){
     this.storage.set('token', this.token);
+  
   }
 
 }
