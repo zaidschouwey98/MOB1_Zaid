@@ -10,6 +10,8 @@ export class DataProvider {
 
   public stock = []
   public user = []
+  public errorMessage;
+ 
 
   constructor(private http: HttpClient, private storage: Storage){}
 
@@ -27,15 +29,11 @@ export class DataProvider {
     })
   }
   public registerToAPI(firstname,lastname,phonenumber){
-    
-    this.http.post(this.apiurl+"/user/apply", {
+  
+    return this.http.post(this.apiurl+"/user/apply", {
       firstname,
       lastname,
       phonenumber
-    }).subscribe(
-      res => console.log("success"),
-      err => {
-      console.log('API failed with code '+err)
     })
   }
 }

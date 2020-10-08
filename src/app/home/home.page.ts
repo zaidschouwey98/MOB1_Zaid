@@ -3,6 +3,8 @@ import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { DataProvider } from '../providers/data';
 import { Router } from '@angular/router';
+import { debug } from 'console';
+import { debuglog } from 'util';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +17,7 @@ export class HomePage implements OnInit {
   private phone: String ;
   private token: String ;
   private Datas: DataProvider;
+  private errorMessage: String;
   constructor(private router: Router, private toaster: ToastController, private storage: Storage, dataprovider: DataProvider) { this.Datas = dataprovider; }
 
   ngOnInit() {
@@ -35,15 +38,41 @@ export class HomePage implements OnInit {
       this.storage.set('phone', this.phone);
 
       //toast
-      this.toaster.create({
-        message: "Bienvenue "+this.firstname+" "+this.lastname+", votre compte a bien été créé",
-        duration: 2000,
-      }).then(toast => {
-        toast.present();
-      });
-      this.Datas.registerToAPI(this.firstname,this.lastname,this.phone);
-     
+      
+      this.Datas.registerToAPI(this.firstname,this.lastname,this.phone).subscribe({
+        next : data => {
+          this.createToaster();
+        },
+        error: (err) => {
+          this.errorToaster(err.status);
+        }
+      })
     }
+  }
+  createToaster(){
+    this.toaster.create({
+      message: "Bienvenue "+this.firstname+" "+this.lastname+", votre compte a bien été créé",
+      duration: 2000,
+    }).then(toast => {
+      toast.present();
+    });
+  }
+  errorToaster(err:any){
+    
+    switch(err){
+      case 400:
+        this.errorMessage = "Numéro déjà utilisé";
+        break;
+      case 500:
+        this.errorMessage = "Vérifiez vos champs";
+        break;
+    }
+    this.toaster.create({
+      message: "Il y a eu un problème : "+ this.errorMessage,
+      duration: 2000,
+    }).then(toast => {
+      toast.present();
+    });
   }
 
   addToken(){
