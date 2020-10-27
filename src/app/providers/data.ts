@@ -29,11 +29,13 @@ export class DataProvider {
     })
   }
   public registerToAPI(firstname,lastname,phonenumber){
-  
+    
     return this.http.post(this.apiurl+"/user/apply", {
       firstname,
       lastname,
       phonenumber
     })
+    
   }
+  
 }

@@ -3,8 +3,7 @@ import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { DataProvider } from '../providers/data';
 import { Router } from '@angular/router';
-import { debug } from 'console';
-import { debuglog } from 'util';
+
 
 @Component({
   selector: 'app-home',
@@ -32,19 +31,27 @@ export class HomePage implements OnInit {
         toast.present();
       });
     }else{
-      //create user
-      this.storage.set('firstname', this.firstname);
-      this.storage.set('lastname', this.lastname);
-      this.storage.set('phone', this.phone);
 
       //toast
       
       this.Datas.registerToAPI(this.firstname,this.lastname,this.phone).subscribe({
         next : data => {
+          //create user
+          this.storage.set('firstname', this.firstname);
+          this.storage.set('lastname', this.lastname);
+          this.storage.set('phone', this.phone);
           this.createToaster();
         },
         error: (err) => {
-          this.errorToaster(err.status);
+          this.errorMessage = err.error;
+          console.log(this.errorMessage.toString());
+          this.toaster.create({
+            message: "Il y a eu un problème : " + this.errorMessage.toString(),
+            duration: 2000,
+            color: 'danger'
+          }).then(toast => {
+            toast.present();
+          });
         }
       })
     }
@@ -57,23 +64,8 @@ export class HomePage implements OnInit {
       toast.present();
     });
   }
-  errorToaster(err:any){
-    
-    switch(err){
-      case 400:
-        this.errorMessage = "Numéro déjà utilisé";
-        break;
-      case 500:
-        this.errorMessage = "Vérifiez vos champs";
-        break;
-    }
-    this.toaster.create({
-      message: "Il y a eu un problème : "+ this.errorMessage,
-      duration: 2000,
-    }).then(toast => {
-      toast.present();
-    });
-  }
+  
+  
 
   addToken(){
     this.storage.set('token', this.token);
