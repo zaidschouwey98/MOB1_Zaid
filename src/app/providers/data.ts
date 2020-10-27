@@ -21,9 +21,11 @@ export class DataProvider {
       this.http.get(this.apiurl+'/products').subscribe(
         response => {
           this.stock = response['data'];
+          resolve(this.stock)
         },
         err => {
           console.log('API failed with code '+err.status)
+          reject(err)
         }
       )
     })

@@ -15,4 +15,16 @@
       {{value.details}}
     </ion-card-content>
   </ion-card>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">
+        Nombre :
+      </ion-label>
+      <ion-input [(ngModel)]="number" type="number"></ion-input>
+      
+    </ion-item>
+    <ion-button (click)="addToBasket(value.id, number)" size="medium">Ajouter au panier</ion-button>
+  </ion-list>
 </ion-content>
+
+
