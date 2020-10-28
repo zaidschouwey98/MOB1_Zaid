@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>panier</ion-title>
+    <ion-title>Panier</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+
+  <ion-list *ngFor="let value of basket">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="http://127.0.0.1:8000/storage/pictures/{{ value.picture }}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{value.name}}</h2>
+        <h3>{{value.price.toFixed(2)}} CHF / {{value.unit}}</h3>
+        <p>{{value.details}}</p>
+      </ion-label>
+      
+        <ion-label position="floating">
+          Nombre :
+        </ion-label>
+        <ion-input value="{{value.number}}" type="number"></ion-input>
+        
+    
+    </ion-item>
+  </ion-list>
+  <!-- <ion-card *ngFor="let value of basket">
+    <img src="http://127.0.0.1:8000/storage/pictures/{{ value.picture }}">
+    <ion-card-header>
+      <ion-card-subtitle>{{value.stock}} Pièces</ion-card-subtitle>
+      <ion-card-title>{{value.name}} | {{value.price}} CHF</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{value.details}}
+    </ion-card-content>
+  </ion-card> -->
 </ion-content>

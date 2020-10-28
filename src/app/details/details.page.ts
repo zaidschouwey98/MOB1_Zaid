@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { promise } from 'protractor';
 
 @Component({
   selector: 'app-details',
@@ -10,7 +10,11 @@ import { Storage } from '@ionic/storage';
 })
 export class DetailsPage implements  OnInit {
   private value;
-  private number : Number;
+  private basketArray = [];
+  private currentItem;
+  private index;
+
+
   
   constructor(private route: ActivatedRoute,private router: Router, private storage:Storage) {
 
@@ -22,11 +26,34 @@ export class DetailsPage implements  OnInit {
   }
 
   ngOnInit() {
-   
+    this.storage.get('basket').then(getBasket => {
+      //le local storage 'basket' existe
+      if(getBasket){
+        this.basketArray = getBasket
+        this.basketArray.forEach(element => {
+          // this.total += element.price;
+        });
+      //le local storage 'basket' n'existe pas (le crée)
+      }else{
+        
+        this.storage.set('basket', this.basketArray).then();
+      }      
+    });
   }
 
-  addToBasket(val : string,num){
-    this.storage.set(val,num);
+  addToBasket(){
+    if(this.basketArray && this.basketArray.length !== 0){
+      const elementIdx = this.basketArray.findIndex(element => element.id === this.value.id)
+      if(elementIdx >= 0) {
+        this.basketArray[elementIdx] = this.value
+      } else {
+        this.basketArray.push(this.value)
+      }
+      this.storage.set("basket", this.basketArray).then(val => {
+        if(val)
+          this.basketArray = val;
+      });
+    }    
   }
 
 }
