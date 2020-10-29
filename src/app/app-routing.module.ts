@@ -21,6 +21,11 @@ const routes: Routes = [
   {
     path: 'details/:val',
     loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
+  },
+  {
+    path: "", 
+    pathMatch: "prefix",
+    redirectTo: "/home"
   }
 
 ];

@@ -6,14 +6,11 @@
 
 <ion-content>
   <ion-item>
-    <ion-label>Gaming</ion-label>
-    <ion-select interface="popover">
-      <ion-select-option value="nes">NES</ion-select-option>
-      <ion-select-option value="n64">Nintendo64</ion-select-option>
-      <ion-select-option value="ps">PlayStation</ion-select-option>
-      <ion-select-option value="genesis">Sega Genesis</ion-select-option>
-      <ion-select-option value="saturn">Sega Saturn</ion-select-option>
-      <ion-select-option value="snes">SNES</ion-select-option>
+    <ion-label>Selectionner un légume</ion-label>
+    <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="addVegetableToBasket($event)">
+      <ion-item *ngFor="let vegetable of getAvailableProducts()">
+        <ion-select-option value="{{ vegetable.id }}">{{ vegetable.name }}</ion-select-option>
+      </ion-item>
     </ion-select>
   </ion-item>
 
