@@ -26,6 +26,7 @@ export class DetailsPage implements  OnInit {
   }
 
   ngOnInit() {
+    console.log(this.value)
     this.storage.get('basket').then(getBasket => {
       //le local storage 'basket' existe
       if(getBasket){

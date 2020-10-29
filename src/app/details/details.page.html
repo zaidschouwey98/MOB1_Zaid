@@ -14,6 +14,15 @@
     <ion-card-content>
       {{value.details}}
     </ion-card-content>
+    <ion-card-content>
+      Les suppliers sont :
+      <p *ngFor="let supplier of value.suppliers">
+        {{supplier.company_name}}
+      </p>
+    </ion-card-content>
+    
+
+
   </ion-card>
   <ion-list>
     <ion-item>
