@@ -21,6 +21,7 @@ export class PanierPage {
   ionViewWillEnter(){
     this.storage.get("basket").then(getBasket => {
       this.basket = getBasket;
+      console.log(this.basket)
       // this.array.difference(this.basket, this.vegetables);
     })
    
@@ -42,6 +43,8 @@ export class PanierPage {
   addVegetableToBasket($event){
     const item = this.vegetables.find(product => product.id === Number($event.detail.value))
     this.basket.push(item)
+    
+    this.storage.set('basket', this.basket).then();
   }
 
 }
