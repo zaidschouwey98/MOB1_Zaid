@@ -25,8 +25,9 @@ export class ValidatestockPage implements OnInit {
     
     this.storage.get("stock").then(getstock => {
       this.storageArray = getstock
+      this.currentVegetable = this.storageArray[this.currentVegetableIndex]
     })
-    this.currentVegetable = this.storageArray[this.currentVegetableIndex]
+    
 
   }
   ngOnInit() {
@@ -44,7 +45,7 @@ export class ValidatestockPage implements OnInit {
     }else
       this.currentVegetableIndex += 1
     this.ionViewWillEnter()
-    console.log(this.currentVegetable)
+
   }
   previousVegetable(){
     if(this.currentVegetableIndex <=0){
@@ -52,7 +53,7 @@ export class ValidatestockPage implements OnInit {
     }else
       this.currentVegetableIndex -= 1
     this.ionViewWillEnter()
-    console.log(this.currentVegetable)
+  
  
   }
 
@@ -74,6 +75,15 @@ export class ValidatestockPage implements OnInit {
     this.ionViewWillEnter()
   }
   save(){
-    
+
+  }
+  restart(){
+    this.validatedVegetables = []
+    this.isSummary = false
+    this.Datas.loadFromAPI().then(res=>{
+      this.storage.set("stock",res)
+      this.currentVegetable = this.Datas.stock[this.currentVegetableIndex]
+    });
+    this.ionViewWillEnter()
   }
 }
