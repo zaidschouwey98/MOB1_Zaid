@@ -9,7 +9,6 @@ import { Storage } from '@ionic/storage';
 })
 export class ValidatestockPage implements OnInit {
   private isSummary :boolean
-  private amount
   private currentVegetableIndex
   private currentVegetable = []
   private storageArray = []
@@ -59,15 +58,22 @@ export class ValidatestockPage implements OnInit {
 
   validate(){
     this.validatedVegetables.push(this.currentVegetable)
+    console.log(this.currentVegetableIndex)
     this.storageArray.splice(this.currentVegetableIndex,1)
-    this.storage.set("stock",this.storageArray).then()
-    this.currentVegetableIndex -=1
+    this.storage.set("stock",this.storageArray).then(res =>{
+      
+      if(this.currentVegetableIndex <=0){
+
+      }else
+        this.currentVegetableIndex -=1
     
-    console.log(this.validatedVegetables)
-    if(this.storageArray.length <=0)
-      this.summary()
-    else
-      this.ionViewWillEnter()
+      console.log(this.currentVegetableIndex)
+      if(this.storageArray.length <=0)
+        this.summary()
+      else
+        this.ionViewWillEnter()
+    })
+    
   }
 
   summary(){
