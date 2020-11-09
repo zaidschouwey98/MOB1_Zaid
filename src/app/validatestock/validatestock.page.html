@@ -22,11 +22,17 @@
       <ion-label position="floating">
         Nombre :
       </ion-label>
-      
+      <ion-input [(ngModel)]="amount" type="number"></ion-input>
       
     </ion-item>
-    <ion-button (click)="previousVegetable()" size="medium">Pre</ion-button>
-    <ion-button (click)="nextVegetable()" size="medium">Next</ion-button>
+    <ion-item>
+      <ion-button (click)="previousVegetable()" size="medium">Pre</ion-button>
+      <ion-button (click)="nextVegetable()" size="medium">Next</ion-button>
+    </ion-item>
+    <ion-item>
+      
+      <ion-button (click)="validate()" size="medium">Valider</ion-button>
+    </ion-item>
   </ion-list>
 </ion-content>
 

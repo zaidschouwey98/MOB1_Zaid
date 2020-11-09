@@ -52,7 +52,7 @@ export class ValidatestockPage implements OnInit {
  
   }
 
-  receipt(){
+  validate(){
 
   }
 }
