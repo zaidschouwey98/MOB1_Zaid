@@ -9,7 +9,8 @@ import { Storage } from '@ionic/storage';
 })
 export class ValidatestockPage implements OnInit {
   private currentVegetableIndex
-  private currentVegetable
+  private currentVegetable = []
+  private storageArray = []
   private vegetables
   private Datas: DataProvider
   constructor(private storage:Storage, data: DataProvider) {
@@ -18,22 +19,37 @@ export class ValidatestockPage implements OnInit {
     
   }
   ionViewWillEnter(){
-    
     this.currentVegetable = this.Datas.stock[this.currentVegetableIndex]
+    this.storage.get("stock").then(getstock => {
+      this.storageArray = getstock
+    })
+    console.log()
     console.log(this.currentVegetable)
+
   }
   ngOnInit() {
     this.currentVegetableIndex = 0
     this.Datas.loadFromAPI().then(res=>{
-      this.storage.set("stock",this.Datas.stock)
+      this.storage.set("stock",res)
+      this.currentVegetable = this.Datas.stock[this.currentVegetableIndex]
     });
     
   }
   nextVegetable(){
-    this.currentVegetableIndex += 1
+    if(this.currentVegetableIndex>= this.storageArray.length-1){
+      this.currentVegetableIndex = 0
+    }else
+      this.currentVegetableIndex += 1
+    this.ionViewWillEnter()
+   
   }
   previousVegetable(){
-    this.currentVegetableIndex -= 1
+    if(this.currentVegetableIndex <=0){
+      this.currentVegetableIndex = this.storageArray.length-1
+    }else
+      this.currentVegetableIndex -= 1
+    this.ionViewWillEnter()
+ 
   }
 
   receipt(){
