@@ -14,6 +14,7 @@ export class ValidatestockPage implements OnInit {
   private storageArray = []
   private vegetables
   private validatedVegetables = []
+  private compactValidVegetables = []
   private Datas: DataProvider
   constructor(private storage:Storage, data: DataProvider) {
     this.Datas = data;
@@ -81,7 +82,10 @@ export class ValidatestockPage implements OnInit {
     this.ionViewWillEnter()
   }
   save(){
-
+    this.validatedVegetables.forEach(element => {
+      this.compactValidVegetables.push(element)
+    });
+  
   }
   restart(){
     this.validatedVegetables = []
@@ -89,7 +93,8 @@ export class ValidatestockPage implements OnInit {
     this.Datas.loadFromAPI().then(res=>{
       this.storage.set("stock",res)
       this.currentVegetable = this.Datas.stock[this.currentVegetableIndex]
+      this.ionViewWillEnter()
     });
-    this.ionViewWillEnter()
+    
   }
 }

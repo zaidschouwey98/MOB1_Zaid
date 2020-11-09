@@ -39,5 +39,11 @@ export class DataProvider {
     })
     
   }
-  
+  public saveToStock(quantities){
+    
+    return this.http.post(this.apiurl+"/products/stock", {
+      quantities
+    })
+    
+  }
 }
