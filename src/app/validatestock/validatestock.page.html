@@ -9,23 +9,18 @@
     <ion-card>
       <img src="http://127.0.0.1:8000/storage/pictures/{{ currentVegetable.picture }}">
       <ion-card-header>
-        <ion-card-subtitle>Quantité: {{ currentVegetable.stock }}  {{ currentVegetable.unit }}</ion-card-subtitle>
+        
         <ion-card-title>{{ currentVegetable.name }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-      
+        <ion-card-subtitle>Quantité: 
+          <ion-input value="{{ currentVegetable.stock }}" [(ngModel)]="currentVegetable.amount" type="number"></ion-input>
+          {{ currentVegetable.unit }}</ion-card-subtitle>
       </ion-card-content>
-      
       
     </ion-card>
     <ion-list>
-      <ion-item>
-        <ion-label position="floating">
-          Nombre :
-        </ion-label>
-        <ion-input [(ngModel)]="currentVegetable.amount" type="number"></ion-input>
-        
-      </ion-item>
+      
       <ion-item>
         <ion-button (click)="previousVegetable()" size="medium">Pre</ion-button>
         <ion-button (click)="nextVegetable()" size="medium">Next</ion-button>
@@ -41,6 +36,7 @@
       <ion-item>
         <ion-label>{{ data.name }} : {{ data.amount }} {{ data.unit }}</ion-label>
       </ion-item>
+      <ion-item><ion-button (click)="save()" size="medium">Sauvegarder</ion-button><ion-button (click)="validate()" size="medium">Recommencer</ion-button></ion-item>
     </ion-list>
   </div>
 </ion-content>

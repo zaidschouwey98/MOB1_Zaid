@@ -73,4 +73,7 @@ export class ValidatestockPage implements OnInit {
     this.isSummary = true;
     this.ionViewWillEnter()
   }
+  save(){
+    
+  }
 }
