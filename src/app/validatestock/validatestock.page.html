@@ -5,35 +5,44 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <img src="http://127.0.0.1:8000/storage/pictures/{{ currentVegetable.picture }}">
-    <ion-card-header>
-      <ion-card-subtitle>Quantité: {{ currentVegetable.stock }}</ion-card-subtitle>
-      <ion-card-title>{{ currentVegetable.name }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      {{ currentVegetable.unit_id }}
-    </ion-card-content>
-    
-    
-  </ion-card>
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">
-        Nombre :
-      </ion-label>
-      <ion-input [(ngModel)]="amount" type="number"></ion-input>
+  <div *ngIf="isSummary === false">
+    <ion-card>
+      <img src="http://127.0.0.1:8000/storage/pictures/{{ currentVegetable.picture }}">
+      <ion-card-header>
+        <ion-card-subtitle>Quantité: {{ currentVegetable.stock }}  {{ currentVegetable.unit }}</ion-card-subtitle>
+        <ion-card-title>{{ currentVegetable.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
       
-    </ion-item>
-    <ion-item>
-      <ion-button (click)="previousVegetable()" size="medium">Pre</ion-button>
-      <ion-button (click)="nextVegetable()" size="medium">Next</ion-button>
-    </ion-item>
-    <ion-item>
+      </ion-card-content>
       
-      <ion-button (click)="validate()" size="medium">Valider</ion-button>
-    </ion-item>
-  </ion-list>
+      
+    </ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">
+          Nombre :
+        </ion-label>
+        <ion-input [(ngModel)]="currentVegetable.amount" type="number"></ion-input>
+        
+      </ion-item>
+      <ion-item>
+        <ion-button (click)="previousVegetable()" size="medium">Pre</ion-button>
+        <ion-button (click)="nextVegetable()" size="medium">Next</ion-button>
+      </ion-item>
+      <ion-item>
+        
+        <ion-button (click)="validate()" size="medium">Valider</ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="isSummary === true">
+    <ion-list *ngFor="let data of validatedVegetables">
+      <ion-item>
+        <ion-label>{{ data.name }} : {{ data.amount }} {{ data.unit }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
 
 

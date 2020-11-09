@@ -8,6 +8,8 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./validatestock.page.scss'],
 })
 export class ValidatestockPage implements OnInit {
+  private isSummary :boolean
+  private amount
   private currentVegetableIndex
   private currentVegetable = []
   private storageArray = []
@@ -28,6 +30,7 @@ export class ValidatestockPage implements OnInit {
 
   }
   ngOnInit() {
+    this.isSummary = false;
     this.currentVegetableIndex = 0
     this.Datas.loadFromAPI().then(res=>{
       this.storage.set("stock",res)
@@ -41,7 +44,7 @@ export class ValidatestockPage implements OnInit {
     }else
       this.currentVegetableIndex += 1
     this.ionViewWillEnter()
-   
+    console.log(this.currentVegetable)
   }
   previousVegetable(){
     if(this.currentVegetableIndex <=0){
@@ -49,14 +52,25 @@ export class ValidatestockPage implements OnInit {
     }else
       this.currentVegetableIndex -= 1
     this.ionViewWillEnter()
+    console.log(this.currentVegetable)
  
   }
 
   validate(){
+    this.validatedVegetables.push(this.currentVegetable)
     this.storageArray.splice(this.currentVegetableIndex,1)
     this.storage.set("stock",this.storageArray).then()
-    console.log(this.storageArray)
-    // this.validatedVegetables.push(this.Datas.stock[this.currentVegetableIndex])
+    this.currentVegetableIndex -=1
+    
+    console.log(this.validatedVegetables)
+    if(this.storageArray.length <=0)
+      this.summary()
+    else
+      this.ionViewWillEnter()
+  }
+
+  summary(){
+    this.isSummary = true;
     this.ionViewWillEnter()
   }
 }
