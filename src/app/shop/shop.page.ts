@@ -10,11 +10,10 @@ import { Route } from '@angular/compiler/src/core';
   styleUrls: ['./shop.page.scss'],
 })
 export class ShopPage implements OnInit {
-  Alldatas: any;
   private Datas: DataProvider;
   constructor(data:DataProvider, private router : Router) {
     this.Datas = data;
-    this.Alldatas = this.Datas.stock;
+    
   }
 
   ngOnInit() {

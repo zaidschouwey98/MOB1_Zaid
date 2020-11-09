@@ -23,10 +23,19 @@ const routes: Routes = [
     loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
   },
   {
+    path: 'validatestock',
+    loadChildren: () => import('./validatestock/validatestock.module').then( m => m.ValidatestockPageModule)
+  },
+  {
     path: "", 
     pathMatch: "prefix",
     redirectTo: "/home"
+  },
+  {
+    path: 'validatestock',
+    loadChildren: () => import('./validatestock/validatestock.module').then( m => m.ValidatestockPageModule)
   }
+
 
 ];
 @NgModule({
