@@ -12,6 +12,7 @@ export class ValidatestockPage implements OnInit {
   private currentVegetable = []
   private storageArray = []
   private vegetables
+  private validatedVegetables = []
   private Datas: DataProvider
   constructor(private storage:Storage, data: DataProvider) {
     this.Datas = data;
@@ -19,12 +20,11 @@ export class ValidatestockPage implements OnInit {
     
   }
   ionViewWillEnter(){
-    this.currentVegetable = this.Datas.stock[this.currentVegetableIndex]
+    
     this.storage.get("stock").then(getstock => {
       this.storageArray = getstock
     })
-    console.log()
-    console.log(this.currentVegetable)
+    this.currentVegetable = this.storageArray[this.currentVegetableIndex]
 
   }
   ngOnInit() {
@@ -53,6 +53,10 @@ export class ValidatestockPage implements OnInit {
   }
 
   validate(){
-
+    this.storageArray.splice(this.currentVegetableIndex,1)
+    this.storage.set("stock",this.storageArray).then()
+    console.log(this.storageArray)
+    // this.validatedVegetables.push(this.Datas.stock[this.currentVegetableIndex])
+    this.ionViewWillEnter()
   }
 }
